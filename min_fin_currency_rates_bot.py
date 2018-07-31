@@ -22,6 +22,7 @@ def handle_text(message):
         if not os.path.isfile(file_path):
             min_fin_api_key = os.environ['MIN_FIN_API_KEY']
             all_json = get_quote(f'http://api.minfin.com.ua/auction/info/{min_fin_api_key}/')
+            print("load from min fin")
             with open(file_path, 'w') as f: 
                 f.write(all_json)
         time_edit = os.path.getmtime(file_path)
@@ -31,11 +32,13 @@ def handle_text(message):
         if diff_time > 360:
             min_fin_api_key = os.environ['MIN_FIN_API_KEY']
             all_json = get_quote(f'http://api.minfin.com.ua/auction/info/{min_fin_api_key}/')
+            print("load from min fin")
             with open(file_path, 'w') as f: 
                 f.write(all_json)
         else:
             with open(file_path) as f: 
                 all_json = f.read()
+                print("load from file")
         
         dictionary_all = json.loads(all_json)
         buy_usd  = dictionary_all['usd']['ask']
