@@ -1,0 +1,1 @@
+worker: python min_fin_currency_rates_bot.py
