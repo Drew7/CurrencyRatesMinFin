@@ -28,7 +28,7 @@ def handle_text(message):
         time_edit = os.path.getmtime(file_path)
         time_now = time.time()
         diff_time = time_now - time_edit
-
+        print(f'{diff_time}')
         if diff_time > 360:
             min_fin_api_key = os.environ['MIN_FIN_API_KEY']
             all_json = get_quote(f'http://api.minfin.com.ua/auction/info/{min_fin_api_key}/')
