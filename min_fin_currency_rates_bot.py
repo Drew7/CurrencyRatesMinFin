@@ -18,7 +18,7 @@ def handle_text(message):
         
     elif message.text == "Rates":
         
-        file_path = os.getcwd() + 'min_fin_rates.json'
+        file_path = os.getcwd() + '\\tmp\\min_fin_rates.json'
         if not os.path.isfile(file_path):
             min_fin_api_key = os.environ['MIN_FIN_API_KEY']
             all_json = get_quote(f'http://api.minfin.com.ua/auction/info/{min_fin_api_key}/')
