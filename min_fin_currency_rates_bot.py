@@ -19,6 +19,11 @@ def handle_text(message):
     elif message.text == "Rates":
         
         file_path = os.getcwd() + 'min_fin_rates.json'
+        if not os.path.isfile(file_path):
+            min_fin_api_key = os.environ['MIN_FIN_API_KEY']
+            all_json = get_quote(f'http://api.minfin.com.ua/auction/info/{min_fin_api_key}/')
+            with open(file_path, 'w') as f: 
+                f.write(all_json)
         time_edit = os.path.getmtime(file_path)
         time_now = time.time()
         diff_time = time_now - time_edit
