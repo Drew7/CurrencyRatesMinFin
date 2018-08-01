@@ -48,7 +48,7 @@ def handle_text(message):
         bot.send_message(message.from_user.id, f'Average sell uah/usd rate {sell_usd}')
         
         bot.send_message(message.from_user.id, 'Source of rates: www.minfin.com.ua/currency/')
-
+        bot.send_message(-260766133, f'Average sell uah/usd rate {sell_usd}')
         
     else:
         markup = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
