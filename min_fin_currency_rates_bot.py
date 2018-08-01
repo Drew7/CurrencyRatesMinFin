@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from urllib.request import Request, urlopen
+from apscheduler.schedulers.blocking import BlockingScheduler
 import json
 import telebot
 import os
@@ -10,6 +11,7 @@ def get_quote(url):
     return urlopen(Request(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64)'})).read().decode(encoding='UTF-8')
 
 bot = telebot.TeleBot(os.environ['TELEGRAM_KEY'])
+sched = BlockingScheduler()
 
 @bot.message_handler(content_types=["text"])
 def handle_text(message):
@@ -49,7 +51,7 @@ def handle_text(message):
         
         bot.send_message(message.from_user.id, 'Source of rates: www.minfin.com.ua/currency/')
         bot.send_message(-260766133, f'Average sell uah/usd rate {sell_usd}')
-        
+        #bot.send_message(-225550033, f'Average sell uah/usd rate {sell_usd}')
     else:
         markup = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
         markup.add(*[telebot.types.KeyboardButton(name) for name in ['Hi', 'Rates']])
@@ -63,4 +65,20 @@ def handle_start_help(message):
 def handle_document_audio(message):
     bot.send_message(message.from_user.id, "What?")
 
+@sched.scheduled_job('cron', day_of_week='mon-sun', hour=10)
+def send_message_to_group():
+    min_fin_api_key = os.environ['MIN_FIN_API_KEY']
+    all_json = get_quote(f'http://api.minfin.com.ua/auction/info/{min_fin_api_key}/')
+    print("load from min fin")
+    
+    dictionary_all = json.loads(all_json)
+    buy_usd  = dictionary_all['usd']['ask']
+    sell_usd = dictionary_all['usd']['bid']
+
+    today = time.strftime("%d.%m.%Y")
+
+    message = f'{today} Курс купівлі на валютному аукціоні {buy_usd} грн/$, курс продажу {sell_usd} грн/$ Розрахунок проводимо по {sell_usd + 0.5} грн/$.'
+    bot.send_message(-260766133, message)
+
+sched.start()
 bot.polling(none_stop=True, interval=0)
