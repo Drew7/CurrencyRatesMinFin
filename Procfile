@@ -1,1 +1,1 @@
-clock: python clock.py
+clock: python min_fin_currency_rates_bot.py
