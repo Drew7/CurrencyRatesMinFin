@@ -65,7 +65,7 @@ def handle_start_help(message):
 def handle_document_audio(message):
     bot.send_message(message.from_user.id, "What?")
 
-@sched.scheduled_job('cron', day_of_week='mon-sun', hour=21, minute=25)
+@sched.scheduled_job('cron', day_of_week='mon-sun', hour=7)
 def send_message_to_group():
     min_fin_api_key = os.environ['MIN_FIN_API_KEY']
     all_json = get_quote(f'http://api.minfin.com.ua/auction/info/{min_fin_api_key}/')
@@ -77,12 +77,12 @@ def send_message_to_group():
 
     today = time.strftime("%d.%m.%Y")
 
-    message_rate = f'{today} Курс купівлі на валютному аукціоні {buy_usd} грн/$, курс продажу {sell_usd} грн/$'
-    message_acc = f'Розрахунок проводимо по {sell_usd + 0.5} грн/$.'
+    message_rate = f'{today}. Курс купівлі на валютному аукціоні {buy_usd} грн/$, курс продажу {sell_usd} грн/$'
+    message_acc = f'Курс для розрахунку {sell_usd + 0.5} грн/$.'
     bot.send_message(-260766133, message_rate)
     bot.send_message(-260766133, message_acc)
-    #bot.send_message(-225550033, message_rate)
-    #bot.send_message(-225550033, message_acc)
+    bot.send_message(-225550033, message_rate)
+    bot.send_message(-225550033, message_acc)
 
 sched.start()
 bot.polling(none_stop=True, interval=0)
