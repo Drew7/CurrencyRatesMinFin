@@ -72,8 +72,8 @@ def send_message_to_group():
     print("load from min fin")
     
     dictionary_all = json.loads(all_json)
-    buy_usd  = dictionary_all['usd']['ask']
-    sell_usd = dictionary_all['usd']['bid']
+    buy_usd  = float(dictionary_all['usd']['ask'])
+    sell_usd = float(dictionary_all['usd']['bid'])
 
     today = time.strftime("%d.%m.%Y")
 
