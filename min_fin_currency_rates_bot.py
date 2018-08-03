@@ -69,7 +69,7 @@ def handle_document_audio(message):
 def send_message_to_group():
     min_fin_api_key = os.environ['MIN_FIN_API_KEY']
     all_json = get_quote(f'http://api.minfin.com.ua/auction/info/{min_fin_api_key}/')
-    print("load from min fin")
+    print("load from min fin for gazik")
     
     dictionary_all = json.loads(all_json)
     buy_usd  = float(dictionary_all['usd']['ask'])
@@ -83,6 +83,26 @@ def send_message_to_group():
     bot.send_message(-260766133, message_acc)
     bot.send_message(-225550033, message_rate)
     bot.send_message(-225550033, message_acc)
+
+@sched.scheduled_job('cron', day_of_week='mon-sat', hour=7, minute=30)
+def send_message_to_group_gazik_lviv():
+    min_fin_api_key = os.environ['MIN_FIN_API_KEY']
+    all_json = get_quote(f'http://api.minfin.com.ua/auction/info/{min_fin_api_key}/')
+    print("load from min fin for gazik_lviv")
+    
+    dictionary_all = json.loads(all_json)
+    buy_usd  = float(dictionary_all['usd']['ask'])
+    sell_usd = float(dictionary_all['usd']['bid'])
+
+    today = time.strftime("%d.%m.%Y")
+
+    message_rate = f'{today}. Курс купівлі на валютному аукціоні {buy_usd} грн/$, курс продажу {sell_usd} грн/$'
+    message_acc = f'Курс для розрахунку {sell_usd + 0.1} грн/$.'
+    
+    bot.send_message(-260766133, message_rate)
+    bot.send_message(-260766133, message_acc)
+    bot.send_message(-265791926, message_rate)
+    bot.send_message(-265791926, message_acc)
 
 sched.start()
 bot.polling(none_stop=True, interval=0)
