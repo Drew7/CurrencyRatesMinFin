@@ -78,7 +78,7 @@ def send_message_to_group():
     today = time.strftime("%d.%m.%Y")
 
     message_rate = f'{today}. Курс купівлі на валютному аукціоні {buy_usd} грн/$, курс продажу {sell_usd} грн/$'
-    message_acc = f'Курс для розрахунку {sell_usd + 0.5} грн/$.'
+    message_acc = f'Курс для розрахунку {round(sell_usd + 0.5, 2)} грн/$.'
     bot.send_message(-260766133, message_rate)
     bot.send_message(-260766133, message_acc)
     bot.send_message(-225550033, message_rate)
@@ -97,7 +97,7 @@ def send_message_to_group_gazik_lviv():
     today = time.strftime("%d.%m.%Y")
 
     message_rate = f'{today}. Курс купівлі на валютному аукціоні {buy_usd} грн/$, курс продажу {sell_usd} грн/$'
-    message_acc = f'Курс для розрахунку {sell_usd + 0.1} грн/$.'
+    message_acc = f'Курс для розрахунку {round(sell_usd + 0.1, 2)} грн/$.'
     
     bot.send_message(-260766133, message_rate)
     bot.send_message(-260766133, message_acc)
