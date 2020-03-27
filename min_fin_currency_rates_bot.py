@@ -66,7 +66,7 @@ def handle_start_help(message):
 def handle_document_audio(message):
     bot.send_message(message.from_user.id, "What?")
 
-@sched.scheduled_job('cron', day_of_week='mon-sun', hour=8, minute=10)
+@sched.scheduled_job('cron', day_of_week='mon-sun', hour=8, minute=16)
 def send_message_to_group():
     min_fin_api_key = os.environ['MIN_FIN_API_KEY']
     all_json = get_quote(f'http://api.minfin.com.ua/auction/info/{min_fin_api_key}/')
@@ -131,37 +131,37 @@ def send_message_to_group():
     <td class='tg-2bhk'>MikroTik hAP Lite TC  (MT RB941-2nD-TC)</td>
     <td class='tg-ezbu'>""" + str(priceUSD_MikroTik_hAP_Lite_TC) + """ $</td>
     <td class='tg-ezbu'>""" + str(round(priceUSD_MikroTik_hAP_Lite_TC * rateUSD, 2)) + """ ₴</td>
-    <td class='tg-ezbu'>""" + str(round(priceUSD_MikroTik_hAP_Lite_TC * rateUSD, 2) + 100) + """ ₴</td>
+    <td class='tg-ezbu'>""" + str(round(priceUSD_MikroTik_hAP_Lite_TC * rateUSD + 100, 2)) + """ ₴</td>
   </tr>
   <tr>
     <td class='tg-0pky'>TP-LINK Archer C20</td>
     <td class='tg-c3ow'>""" + str(priceUSD_TP_LINK_Archer_C20) + """ $</td>
     <td class='tg-c3ow'>""" + str(round(priceUSD_TP_LINK_Archer_C20 * rateUSD, 2)) + """ ₴</td>
-    <td class='tg-c3ow'>""" + str(round(priceUSD_TP_LINK_Archer_C20 * rateUSD, 2) + 100) + """ ₴</td>
+    <td class='tg-c3ow'>""" + str(round(priceUSD_TP_LINK_Archer_C20 * rateUSD + 100, 2)) + """ ₴</td>
   </tr>
   <tr>
     <td class='tg-alz1'>Xiaomi Mi WiFi Router 4A Gigabit Edition</td>
     <td class='tg-i6s1'>""" + str(priceUSD_Xiaomi_Mi_WiFi_Router_4A_Gigabit_Edition) + """ $</td>
     <td class='tg-i6s1'>""" + str(round(priceUSD_Xiaomi_Mi_WiFi_Router_4A_Gigabit_Edition * rateUSD, 2)) + """ ₴</td>
-    <td class='tg-i6s1'>""" + str(round(priceUSD_Xiaomi_Mi_WiFi_Router_4A_Gigabit_Edition * rateUSD, 2) + 100) + """ ₴</td>
+    <td class='tg-i6s1'>""" + str(round(priceUSD_Xiaomi_Mi_WiFi_Router_4A_Gigabit_Edition * rateUSD + 100, 2)) + """ ₴</td>
   </tr>
   <tr>
     <td class='tg-0lax'>TP-LINK Archer C6</td>
     <td class='tg-baqh'>""" + str(priceUSD_TP_LINK_Archer_C6) + """ $</td>
     <td class='tg-baqh'>""" + str(round(priceUSD_TP_LINK_Archer_C6 * rateUSD, 2)) + """ ₴</td>
-    <td class='tg-baqh'>""" + str(round(priceUSD_TP_LINK_Archer_C6 * rateUSD, 2) + 100) + """ ₴</td>
+    <td class='tg-baqh'>""" + str(round(priceUSD_TP_LINK_Archer_C6 * rateUSD + 100, 2)) + """ ₴</td>
   </tr>
   <tr>
     <td class='tg-alz1'>Mikrotik cAP ac (RBcAPGi-5acD2nD)</td>
     <td class='tg-i6s1'>""" + str(priceUSD_Mikrotik_cAP_ac) + """ $</td>
     <td class='tg-i6s1'>""" + str(round(priceUSD_Mikrotik_cAP_ac * rateUSD, 2)) + """ ₴</td>
-    <td class='tg-i6s1'>""" + str(round(priceUSD_Mikrotik_cAP_ac * rateUSD, 2) + 100) + """ ₴</td>
+    <td class='tg-i6s1'>""" + str(round(priceUSD_Mikrotik_cAP_ac * rateUSD + 100, 2)) + """ ₴</td>
   </tr>
   <tr>
     <td class='tg-0lax'>MikroTik hAP ac² (RBD52G-5HacD2HnD-TC)</td>
     <td class='tg-baqh'>""" + str(priceUSD_MikroTik_hAP_ac2) + """ $</td>
     <td class='tg-baqh'>""" + str(round(priceUSD_MikroTik_hAP_ac2 * rateUSD, 2)) + """ ₴</td>
-    <td class='tg-baqh'>""" + str(round(priceUSD_MikroTik_hAP_ac2 * rateUSD, 2) + 100) + """ ₴</td>
+    <td class='tg-baqh'>""" + str(round(priceUSD_MikroTik_hAP_ac2 * rateUSD + 100, 2)) + """ ₴</td>
   </tr>
 </table>"""
     
