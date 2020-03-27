@@ -66,7 +66,7 @@ def handle_start_help(message):
 def handle_document_audio(message):
     bot.send_message(message.from_user.id, "What?")
 
-@sched.scheduled_job('cron', day_of_week='mon-sun', hour=8, minute=16)
+@sched.scheduled_job('cron', day_of_week='mon-sun', hour=8)
 def send_message_to_group():
     min_fin_api_key = os.environ['MIN_FIN_API_KEY']
     all_json = get_quote(f'http://api.minfin.com.ua/auction/info/{min_fin_api_key}/')
