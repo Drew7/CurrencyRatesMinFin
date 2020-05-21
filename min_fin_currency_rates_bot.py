@@ -180,7 +180,7 @@ def send_message_to_group():
     tags = 'Ціни на роутери'
     message_text = '<a href="' + image_url + '">' + tags + '</a>'
 
-    bot.send_message(parse_mode='HTML', chat_id=-225550033, text=message_text)
+    #bot.send_message(parse_mode='HTML', chat_id=-225550033, text=message_text)
     
 
 '''@sched.scheduled_job('cron', day_of_week='mon-sat', hour=8, minute=30)
