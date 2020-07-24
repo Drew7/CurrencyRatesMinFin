@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from urllib.request import Request, urlopen
+from bs4 import BeautifulSoup
 from apscheduler.schedulers.blocking import BlockingScheduler
 import json
 import telebot
@@ -21,7 +22,7 @@ def handle_text(message):
         
     elif message.text == "Rates":
         
-        file_path = os.getcwd() + '/tmp/min_fin_rates.json'
+        """file_path = os.getcwd() + '/tmp/min_fin_rates.json'
         if not os.path.isfile(file_path):
             min_fin_api_key = os.environ['MIN_FIN_API_KEY']
             all_json = get_quote(f'http://api.minfin.com.ua/auction/info/{min_fin_api_key}/')
@@ -45,7 +46,22 @@ def handle_text(message):
         
         dictionary_all = json.loads(all_json)
         buy_usd  = dictionary_all['usd']['ask']
-        sell_usd = dictionary_all['usd']['bid']
+        sell_usd = dictionary_all['usd']['bid']"""
+        
+        url = 'https://minfin.com.ua/currency/auction/usd/buy/all/'
+
+        all_json = urlopen(Request(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64)'})).read().decode(encoding='UTF-8')
+        soup = BeautifulSoup(all_json, 'html.parser')
+        buy = soup.find('div', class_='au-mid-buysell').text
+
+        divs = soup.find_all(class_='au-mid-buysell')
+
+        index_of_uah_b = divs[0].text.find('грн')
+
+        buy_usd = divs[0].text[index_of_uah_b - 6:index_of_uah_b - 1]
+
+        index_of_uah_s = divs[1].text.find('грн')
+        sell_usd = divs[1].text[index_of_uah_s - 6:index_of_uah_s - 1]
 
         bot.send_message(message.from_user.id, f'Average buy uah/usd rate {buy_usd}')
         bot.send_message(message.from_user.id, f'Average sell uah/usd rate {sell_usd}')
