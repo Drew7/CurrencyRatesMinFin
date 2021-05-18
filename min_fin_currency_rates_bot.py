@@ -101,7 +101,8 @@ def send_message_to_group():
     bot.send_message(-225550033, message_rate)
     bot.send_message(-225550033, message_acc)
     
-        
+    
+    
     priceUSD_MikroTik_hAP_Lite_TC = 24.80
     
     priceUSD_TP_LINK_Archer_C20 = 33.96
